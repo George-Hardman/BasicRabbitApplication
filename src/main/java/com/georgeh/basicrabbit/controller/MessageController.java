@@ -13,13 +13,13 @@ public class MessageController {
     @Autowired
     RabbitMQProducer producer;
 
-    @GetMapping("/api")
-    public ResponseEntity<String> response(@RequestParam("send") String message, @RequestParam("key") String key) {
+    @GetMapping("/direct")
+    public ResponseEntity<String> response(@RequestParam("message") String message, @RequestParam("key") String key) {
         producer.sendMessage(message, key);
         return ResponseEntity.ok(String.format("Message sent using key:  %s: -> %s", key, message));
     }
 
-    @GetMapping("fan")
+    @GetMapping("/fan")
     public ResponseEntity<String> response(@RequestParam("message") String message) {
         producer.fanMessage(message);
         return ResponseEntity.ok(String.format("Message fanned: -> %s", message));
