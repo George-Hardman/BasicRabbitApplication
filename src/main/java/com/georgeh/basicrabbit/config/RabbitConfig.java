@@ -1,14 +1,16 @@
 package com.georgeh.basicrabbit.config;
 
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Create a Rabbit pipeline with 3 queues, direct exchanges and a single fanout exchange
+ */
 @Configuration
 public class RabbitConfig {
-    // Create a Rabbit pipeline with a single queue, exchange and binding
+    // Get the names from application.properties
     @Value("${rabbit.queue.queue1.name}")
     private String queue1Name;
     @Value("${rabbit.queue.queue2.name}")
@@ -26,6 +28,10 @@ public class RabbitConfig {
     @Value("${rabbit.exchange.fanout.name}")
     private String fanout;
 
+    /**
+     * Create the RabbitMQ structure required
+     * @return the vatious Rabbit components.
+     */
     @Bean
     public Declarables fanoutBinding() {
         Queue queue1 = new Queue(queue1Name);

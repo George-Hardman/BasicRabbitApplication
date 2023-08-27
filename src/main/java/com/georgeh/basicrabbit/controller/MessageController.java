@@ -4,12 +4,15 @@ import com.georgeh.basicrabbit.publisher.RabbitMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Create the REST endpoints for direct and fan routing.
+ */
 @RestController
 public class MessageController {
+    // producer class needs to be Autowired in.
     @Autowired
     RabbitMQProducer producer;
 
